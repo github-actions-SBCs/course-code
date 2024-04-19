@@ -1,0 +1,23 @@
+name: Simple Action
+on: [push]
+
+jobs:
+  simple-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simple JS action
+        id: greet
+
+        ## https://github.com/actions/hello-world-javascript-action ---itt használva van egy action egy másik action-ben, nevezetesen a hello world használva lesz itt nálunk
+        ## ezt a hosszú számot a commits alatt találjuk majd meg mindig minden branch esetén: https://github.com/actions/hello-world-javascript-action/commits/main/?after=eaa7b84fa5f54dba6744bcd1a363c161dd05eb8f+69
+
+        uses: actions/hello-world-javascript-action@e76147da8e5c81eaf017dede5645551d4b94427b
+
+        #pár input megadása with-el történik
+
+        with:
+          who-to-greet: SBCs
+
+        # ez az output a programhoz
+      - name: Log Greeting Time
+        run: echo "${{steps.greet.output.time}}"
