@@ -1,6 +1,8 @@
 name: First Workflow
 on: [push]
 
+# ha azt akarjuk, hogy ne fusson a workflow-nk, akkor a push message-ba benne kell h szerepeljen ez:  [skip ci] vagy [ci skip] vagy [no ci] vagy [skip actions] vagy [action skip]
+
 # 1 v több job-ot kell tartalmazzon
 
 jobs:
