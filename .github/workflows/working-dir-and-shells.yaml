@@ -1,0 +1,48 @@
+name: Working Dirs & Shells
+
+on: [push]
+
+# itt leszögezzük, hogy bash kód fusson a run-ban, by default
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  display-wf-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display Worling Directory & list files
+        ## a runhoz bash code kell
+
+        run: |
+          pwd
+          ls -a
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_WORKSPACE
+
+      - name: Change Working Dir
+        working-directory: /home/runner
+        run: pwd
+
+  display-wf-info-windows:
+    runs-on: windows-latest
+    # itt pedig a fenti default-ot fölül kell írnunk mert ez windows
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Display Worling Directory & list files
+        ## a runhoz shell code kell
+        run: |
+          Get-Location
+          dir
+          echo $env:GITHUB_SHA
+          echo $env:GITHUB_REPOSITORY
+          echo $env:GITHUB_WORKSPACE
+
+      - name: Python shell
+        shell: python ## steppen belül is fölülírhatjuk a shellt
+        run: |
+          import platform
+          print(platform.processor())
