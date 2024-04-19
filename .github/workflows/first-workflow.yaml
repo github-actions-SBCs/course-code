@@ -1,10 +1,12 @@
 name: First Workflow
 on: [push]
 
+# ha azt akarjuk, hogy ne fusson a workflow-nk, akkor a push message-ba benne kell h szerepeljen ez:  [skip ci] vagy [ci skip] vagy [no ci] vagy [skip actions] vagy [action skip]
+
 # 1 v több job-ot kell tartalmazzon
 
 jobs:
-  run-shell-commands:
+  run-shell-commands: ##needs-be lehet hivatkozni
     runs-on: ubuntu-latest
     steps:
       - name: echo a string
@@ -13,3 +15,17 @@ jobs:
         run: |
           node -v
           npm -v
+
+  paralell-job-macos:
+    runs-on: macos-latest
+    steps:
+      - name: View sw version
+        run: sw_vers
+  dependant-job:
+    runs-on: windows-latest
+    needs: run-shell-commands ##job megnevezés
+    steps:
+      - name: echo a string
+        run: Write-Output "Windows String"
+      - name: Error Step
+        run: doesnotexists ## ez azért kell h errort idézzünk elő
