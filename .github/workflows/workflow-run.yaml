@@ -4,6 +4,8 @@ on:
   workflow_run:
     workflows: [Repository Events] # akkor indul el a jobunk, ha a Repository Events job már lefutott, tehát egyik job függ a másiktól
     types: [completed]
+    branches:
+      - main
 
 jobs:
   echo-string:
