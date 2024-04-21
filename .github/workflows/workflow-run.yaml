@@ -1,0 +1,12 @@
+name: Workflow run
+
+on:
+  workflow_run:
+    workflows: [Repository Events] # akkor indul el a jobunk, ha a Repository Events job már lefutott, tehát egyik job függ a másiktól
+    types: [completed]
+
+jobs:
+  echo-string:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "I was triggered because 'Repository Events' was completed"
