@@ -36,6 +36,11 @@ jobs:
           path: coverage
           retentoin-day: 10
 
+      - name: Download Code Coverage
+        uses: actions/download-artifact@v3
+        with:
+          name: code-coverage
+
       - name: Use Axios
         uses: actions/github-script@v6
         with:
