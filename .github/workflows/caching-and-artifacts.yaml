@@ -12,8 +12,13 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: "npm-cache"
+          # key: "npm-cache"
+          # pl linus-npm-cache-76832
+          key: ${{runner.os}}-npm-cache-${{hashFiles('**/package-lock.json')}} # dinamikus update, ha pl a node_modules változik, akkor update-lődik itt is
 
+          restore-keys: |
+            ${{runner.os}}-npm-cache-
+            ${{runner.os}}-
       - name: Display Cache Output
         run: echo '${{toJson(steps.cache-dependecies.outputs)}}'
 
