@@ -5,10 +5,13 @@ on: [push]
 
 jobs:
   node-matrix:
+    continue-on-error: false # ha egy job fail-el akkor a többiek  fail-eljenek
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
         node-version: [14, 15, 16]
+    #   fail-fast: false ##ha egy job fail-el akkor a többiek ne fail-eljenek
+    # max-parallel: 3 ##max 3 job futhat párhuzamosan
     runs-on: ${{matrix.os}}
     steps:
       - run: node -v
