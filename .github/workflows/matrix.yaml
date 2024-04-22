@@ -1,14 +1,15 @@
 # pl van egy job-unk és azt többször futtatjuk, de nem mind1, hogy melyik node verzióval. Tehát ugyanazt futtatjük különböző node verziókra
-
+# továbbá különböző oprendszeren is fut majd a job
 name: Matrix
 on: [push]
 
 jobs:
   node-matrix:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
+        os: [ubuntu-latest, windows-latest]
         node-version: [14, 15, 16]
+    runs-on: ${{matrix.os}}
     steps:
       - run: node -v
       - uses: actions/setup-node@v3
